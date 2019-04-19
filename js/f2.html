@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.all{
+				width: 500px;
+				height: 500px;
+				background: url(../img/5.jpg) no-repeat 100% 100%;
+				border: 1px solid green;
+			    margin-left: 400px;
+			    margin-top: 20px;  
+			}
+			.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+}
+ .nei{
+ 	width: 1000px;
+ 	height: 50px;
+ }
+ .yang{
+ 	width: 100px;
+ 	height: 50px;
+ }
+.modal-content {
+    background-color: #fefefe;
+    width: 300px;
+	height: 300px;
+    padding: 20px;
+    border: 1px solid #888;
+    margin: 100px auto;
+    position: relative;
+}
+.modal-content #f1{
+	width: 300px;
+	height: 300px;
+	} 
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top:2px;
+}
+.f3{
+	position: absolute;
+	left: 140px;
+	background-color: red;
+	border: 1px solid gold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.h1{
+	width: 200px;
+	height: 100px;
+	border: 1px solid chartreuse;
+	margin-left: 500px;
+	display: none;
+}
+		</style>
+	</head>
+	<body>
+		<div class="all">
+		<button id="myBtn">发布</button>
+         <div id="nei" class="nei"></div>
+          <div id="yang" class="yang"></div>
+          <div id="h1" class="h1">
+ 
+  <!-- 弹窗内容 -->
+  <div class="h2">
+    <p>你确定要删除吗?</p>
+    <button id="btn1">撤回</button>
+  </div>
+ 
+</div>
+<!-- 弹窗 -->
+<div id="myModal" class="modal">
+  <!-- 弹窗内容 -->
+  <div class="modal-content">
+  <div id="f1">
+			<form class="f2">
+				用户名：
+      <input type="user" />
+      <br/>
+      	内容:
+      <input type="text" id="text"/>			
+			</form>
+		</div>
+  	<button class="f3" id="fa">发布</button>
+    <span class="close">&times;</span>
+  </div>
+</div>
+</div>
+<script>	
+var modal = document.getElementById('myModal');
+var btn = document.getElementById("myBtn");
+var span = document.querySelector('.close');
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+span.onclick = function() {
+    modal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+var button=document.getElementById("fa");
+button.onclick=function(){
+	modal.style.display = "none";	
+   var text=document.getElementById("text");
+   var wenben=text.value;
+   document.getElementById("nei").innerHTML=wenben;
+	var date=new Date();
+	 var d=date.toLocaleString();//转换时间格式
+   document.getElementById("yang").innerHTML=d;
+  window.s1=date.getTime();//要把s1设置成为全局变量,不然下面的s1减不了他,还要把时间用getTime()来转换，不然2个时间相减就是ＮＡＮ型的，而不是数字型的
+}
+document.getElementById("nei").onclick=function(){//微博消息点击事件
+	h1.style.display = "block";
+	var btn1=document.getElementById("btn1");
+	btn1.onclick=function(){
+		var date=new Date();
+	var e=date.toLocaleString();
+	var s2=date.getTime();
+	var a=parseInt(s2 - s1);  //这里减出来的值是毫秒为单位的
+	console.log(a);
+if(a<120000)//这里设置时间为小于120秒就可以撤回，大于120秒就不能撤回了
+{
+		document.getElementById("nei").innerHTML=" ";
+		document.getElementById("yang").innerHTML=" ";
+		h1.style.display = "none";
+}else{
+	alert("你发的消息超过2分钟了哦，小哥子！啦啦啦");
+}
+
+	}
+	
+}
+</script>
+	</body>
+</html>
